@@ -16,7 +16,7 @@ namespace AddressBookApp
             Contact contact2 = new Contact("Hello", "Jiw", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
             Contact contact3= new Contact("Vishvas", "Vaglay", "house no 2", "shivpuri - b", "Haryana", "135001", "9991377488", "vishvas@mail.com");
             Contact contact4 = new Contact("Vishvas", "Vaglay", "house no 20", "shivpuri - c", "Haryana", "135002", "7991377488", "vishvas@mail.com");
-            Contact contact5 = new Contact("Bharosa", "Vaglay", "house no 221", "sundar nagar", "Punjab", "140401", "8991377488", "vishvas@mail.com");
+            Contact contact5 = new Contact("Bharosa", "Vaglay", "house no 221", "sundar nagar", "Punjab", "120401", "8991377488", "vishvas@mail.com");
 
 
             try
@@ -114,13 +114,30 @@ namespace AddressBookApp
             ////UC10 (Count by City or State)
             //addressBook2.GetCountByCityOrState();
 
-            //UC11 (Sort Entries by Name)
-            Console.WriteLine("Before Sorting:");
+            ////UC11 (Sort Entries by Name)
+            //Console.WriteLine("Before Sorting:");
+            //addressBook2.PrintAll();
+
+            //addressBook2.SortByName();
+
+            //Console.WriteLine("\nAfter Sorting by Name:");
+            //addressBook2.PrintAll();
+
+            //UC 12 — Sort by City, State, or Zip
+            Console.WriteLine("Enter field name to sort by contacts : ");
+            string? field = Console.ReadLine().ToLower();
+
+            Console.WriteLine($"Before Sorting by {field} : ");
             addressBook2.PrintAll();
+            if (field == "city")
+            {
+                addressBook2.SortByCity();
+            }
+            else if (field == "state") addressBook2.SortByState();
+            else if (field == "zip") addressBook2.SortByZip();
+            else Console.WriteLine("Enter a valid field value ");
 
-            addressBook2.SortByName();
-
-            Console.WriteLine("\nAfter Sorting by Name:");
+            Console.WriteLine($"\nAfter Sorting by {field}:");
             addressBook2.PrintAll();
 
         }
