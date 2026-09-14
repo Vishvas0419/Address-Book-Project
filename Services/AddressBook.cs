@@ -113,5 +113,10 @@ namespace AddressBookApp.Services
             }
         }
 
+        public void SortByName()
+        {
+            contacts = contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName).ToList();
+        }
+
     }
 }

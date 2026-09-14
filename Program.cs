@@ -108,11 +108,20 @@ namespace AddressBookApp
             //    Console.WriteLine(contact);
             //}
 
-            //UC-9  (View Contacts by City or State)
-            addressBookMain.ViewByCityOrState();
+            ////UC-9  (View Contacts by City or State)
+            //addressBookMain.ViewByCityOrState();
 
-            addressBook2.GetCountByCityOrState();
+            ////UC10 (Count by City or State)
+            //addressBook2.GetCountByCityOrState();
 
+            //UC11 (Sort Entries by Name)
+            Console.WriteLine("Before Sorting:");
+            addressBook2.PrintAll();
+
+            addressBook2.SortByName();
+
+            Console.WriteLine("\nAfter Sorting by Name:");
+            addressBook2.PrintAll();
         }
     }
 }
