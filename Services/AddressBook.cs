@@ -109,6 +109,7 @@ namespace AddressBookApp.Services
             foreach (var group in stateResult)
             {
                 Console.Write($"{group.State} = {group.Count}"+", ");
+
             }
         }
 
