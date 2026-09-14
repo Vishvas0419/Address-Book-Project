@@ -33,6 +33,17 @@ namespace AddressBookApp
             AddressBook addressBook = new AddressBook();
             addressBook.AddContact(contact1);
             //addressBook.AddContact(contact2);
+            //addressBook.PrintAll();
+
+            //UC 4 - edit Contact
+
+            Console.WriteLine("Enter first name to edit");
+            string? firstName = Console.ReadLine();
+            Console.WriteLine("Enter last name to edit");
+            string? lastName = Console.ReadLine();
+            Console.WriteLine($"Editing : {firstName} {lastName}");
+            addressBook.EditContact(firstName, lastName);
+
             addressBook.PrintAll();
         }
     }

@@ -1,6 +1,9 @@
-﻿using AddressBookApp.Models;
+﻿using AddressBookApp.Exceptions;
+using AddressBookApp.Models;
+using AddressBookApp.Validation;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace AddressBookApp.Services
@@ -21,6 +24,54 @@ namespace AddressBookApp.Services
             {
                 Console.WriteLine(contact);
             }
+        }
+
+        public void EditContact(string firstName,string lastName)
+        {
+            Contact? contact = contacts.FirstOrDefault(c => c.FirstName == firstName && c.LastName == lastName);
+            if(contact==null)
+            {
+                Console.WriteLine("Contact Not Found!");
+                return;
+            }
+            Console.WriteLine("Enter new first name : ");
+            string? newFirstName = Console.ReadLine();
+           if(!string.IsNullOrWhiteSpace(newFirstName))
+           {
+                if (ContactValidator.IsValidName(newFirstName))
+                {
+                    contact.FirstName = newFirstName;
+                }
+                else throw new InvalidContactException(" First name must start with a capital letter and be at least 3 characters.");
+           }
+            Console.WriteLine("Enter new last name : ");
+            string? newLastName = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(newLastName))
+            {
+                if (ContactValidator.IsValidName(newLastName))
+                {
+                    contact.LastName = newLastName;
+                }
+                else
+                {
+                    throw new InvalidContactException("Error : last name must start with a capital letter and be at least 3 characters. ");
+                }
+            }
+
+            Console.WriteLine("Enter new city to update : ");
+            string? newCity = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(newCity))
+            {
+                if (ContactValidator.IsValidCity(newCity))
+                {
+                    contact.City = newCity;
+                }
+                else
+                {
+                    throw new InvalidContactException("Error : last name must start with a capital letter and be at least 3 characters. ");
+                }
+            }
+            Console.WriteLine("Contact Updated successfully");
         }
     }
 }
