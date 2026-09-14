@@ -88,25 +88,28 @@ namespace AddressBookApp
             //UC7 is done along with UC3 in AddContact method above
 
             //UC8 - Search Contact By City or State
-            Console.WriteLine("Enter city to search : ");
-            string? city = Console.ReadLine();
-            var results = addressBookMain.SearchContactByCity(city);
-            int countResult = results.Count();
-            Console.WriteLine($"Found {countResult} contact(s): ");
-            foreach(var contact in results)
-            {
-                Console.WriteLine(contact);
-            }
+            //Console.WriteLine("Enter city to search : ");
+            //string? city = Console.ReadLine();
+            //var results = addressBookMain.SearchContactByCity(city);
+            //int countResult = results.Count();
+            //Console.WriteLine($"Found {countResult} contact(s): ");
+            //foreach(var contact in results)
+            //{
+            //    Console.WriteLine(contact);
+            //}
 
-            Console.WriteLine("Enter state to search : ");
-            string? state = Console.ReadLine();
-            var stateResults = addressBookMain.SearchContactByState(state);
-            int countStateResults = stateResults.Count();
-            Console.WriteLine($"Found {countStateResults} contact(s): ");
-            foreach (var contact in stateResults)
-            {
-                Console.WriteLine(contact);
-            }
+            //Console.WriteLine("Enter state to search : ");
+            //string? state = Console.ReadLine();
+            //var stateResults = addressBookMain.SearchContactByState(state);
+            //int countStateResults = stateResults.Count();
+            //Console.WriteLine($"Found {countStateResults} contact(s): ");
+            //foreach (var contact in stateResults)
+            //{
+            //    Console.WriteLine(contact);
+            //}
+
+            //UC-9  (View Contacts by City or State)
+            addressBookMain.ViewByCityOrState();
 
         }
     }
