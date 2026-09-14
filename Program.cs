@@ -111,6 +111,8 @@ namespace AddressBookApp
             //UC-9  (View Contacts by City or State)
             addressBookMain.ViewByCityOrState();
 
+            addressBook2.GetCountByCityOrState();
+
         }
     }
 }

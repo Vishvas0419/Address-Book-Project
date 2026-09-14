@@ -95,6 +95,22 @@ namespace AddressBookApp.Services
         }
 
         
+        public void GetCountByCityOrState()
+        {
+            var result = contacts.GroupBy(c => c.City).Select(g => new {City = g.Key, Count = g.Count()});
+            Console.Write("By City : ");
+            foreach (var group in result)
+            {
+                Console.Write($"{group.City} = {group.Count}"+", ");
+            }
+            Console.WriteLine();
+            var stateResult = contacts.GroupBy(c => c.State).Select(g => new { State = g.Key, Count = g.Count() });
+            Console.Write("By state : ");
+            foreach (var group in stateResult)
+            {
+                Console.Write($"{group.State} = {group.Count}"+", ");
+            }
+        }
 
     }
 }
