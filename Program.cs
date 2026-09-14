@@ -15,7 +15,7 @@ namespace AddressBookApp
             Contact contact1 = new Contact("John", "Doe", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
             Contact contact2 = new Contact("Hello", "Jiw", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
             Contact contact3= new Contact("Vishvas", "Vaglay", "house no 2", "shivpuri - b", "Haryana", "135001", "9991377488", "vishvas@mail.com");
-            Contact contact4 = new Contact("Vishu", "Vaglay", "house no 20", "shivpuri - c", "Haryana", "135002", "7991377488", "vishvas@mail.com");
+            Contact contact4 = new Contact("Vishvas", "Vaglay", "house no 20", "shivpuri - c", "Haryana", "135002", "7991377488", "vishvas@mail.com");
             Contact contact5 = new Contact("Bharosa", "Vaglay", "house no 221", "sundar nagar", "Punjab", "140401", "8991377488", "vishvas@mail.com");
 
 
@@ -34,7 +34,7 @@ namespace AddressBookApp
                 return;
             }
             
-            //UC-3 
+            //UC-3 (Add contact) and UC-7 (check for duplicate contacts)
             AddressBook addressBook1 = new AddressBook();
             addressBook1.AddContact(contact1);
             addressBook1.AddContact(contact2);
@@ -42,7 +42,7 @@ namespace AddressBookApp
 
             AddressBook addressBook2 = new AddressBook();
             addressBook2.AddContact(contact3);
-            addressBook2.AddContact(contact4);
+            addressBook2.AddContact(contact4); //this will not be added since duplicate names
             addressBook2.AddContact(contact5);
             addressBook2.PrintAll();
 
