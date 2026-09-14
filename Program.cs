@@ -14,6 +14,11 @@ namespace AddressBookApp
 
             Contact contact1 = new Contact("John", "Doe", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
             Contact contact2 = new Contact("Hello", "Jiw", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
+            Contact contact3= new Contact("Vishvas", "Vaglay", "house no 2", "shivpuri - b", "Haryana", "135001", "9991377488", "vishvas@mail.com");
+            Contact contact4 = new Contact("Vishu", "Vaglay", "house no 20", "shivpuri - c", "Haryana", "135002", "7991377488", "vishvas@mail.com");
+            Contact contact5 = new Contact("Bharosa", "Vaglay", "house no 221", "sundar nagar", "Punjab", "140401", "8991377488", "vishvas@mail.com");
+
+
             try
             {
 
@@ -30,10 +35,17 @@ namespace AddressBookApp
             }
             
             //UC-3 
-            AddressBook addressBook = new AddressBook();
-            addressBook.AddContact(contact1);
-            addressBook.AddContact(contact2);
-            addressBook.PrintAll();
+            AddressBook addressBook1 = new AddressBook();
+            addressBook1.AddContact(contact1);
+            addressBook1.AddContact(contact2);
+            addressBook1.PrintAll();
+
+            AddressBook addressBook2 = new AddressBook();
+            addressBook2.AddContact(contact3);
+            addressBook2.AddContact(contact4);
+            addressBook2.AddContact(contact5);
+            addressBook2.PrintAll();
+
 
             //UC 4 - edit Contact
 
@@ -47,13 +59,31 @@ namespace AddressBookApp
             //addressBook.PrintAll();
 
 
-            Console.WriteLine("Enter first name to delete : ");
-            string? firstName = Console.ReadLine();
-            Console.WriteLine("Enter last name to delete: ");
-            string? lastName = Console.ReadLine();
-            
-            addressBook.DeleteContact(firstName, lastName);
-            addressBook.PrintAll();
+            //UC 5 - Delete a contact
+            //Console.WriteLine("Enter first name to delete : ");
+            //string? firstName = Console.ReadLine();
+            //Console.WriteLine("Enter last name to delete: ");
+            //string? lastName = Console.ReadLine();
+
+            //addressBook.DeleteContact(firstName, lastName);
+            //addressBook.PrintAll();
+
+
+
+            //UC6 - count contacts
+            AddressBookMain addressBookMain = new AddressBookMain();
+
+            int countAddressBook1 = addressBookMain.CountSingleBookContacts(addressBook1);
+            Console.WriteLine($"Total Contacts in AddressBook1 : {countAddressBook1}");
+            int countAddressBook2 = addressBookMain.CountSingleBookContacts(addressBook2);
+            Console.WriteLine($"Total Contacts in AddressBook2 : {countAddressBook2}");
+
+            addressBookMain.AddAddressBook(addressBook1);
+            addressBookMain.AddAddressBook(addressBook2);
+
+            int count = addressBookMain.CountTotalContacts();
+            Console.WriteLine($"Total contacts in all address books: {count}");
+
 
         }
     }

@@ -10,7 +10,7 @@ namespace AddressBookApp.Services
 {
     internal class AddressBook
     {
-        private List<Contact> contacts = new();
+        public List<Contact> contacts = new();
         private Contact contact;
         public void AddContact(Contact contact)
         {
