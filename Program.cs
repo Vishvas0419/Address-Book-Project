@@ -122,6 +122,7 @@ namespace AddressBookApp
 
             Console.WriteLine("\nAfter Sorting by Name:");
             addressBook2.PrintAll();
+
         }
     }
 }
