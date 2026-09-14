@@ -70,20 +70,43 @@ namespace AddressBookApp
 
 
 
-            //UC6 - count contacts
             AddressBookMain addressBookMain = new AddressBookMain();
 
-            int countAddressBook1 = addressBookMain.CountSingleBookContacts(addressBook1);
-            Console.WriteLine($"Total Contacts in AddressBook1 : {countAddressBook1}");
-            int countAddressBook2 = addressBookMain.CountSingleBookContacts(addressBook2);
-            Console.WriteLine($"Total Contacts in AddressBook2 : {countAddressBook2}");
+            //UC6 - count contacts
+
+            //int countAddressBook1 = addressBookMain.CountSingleBookContacts(addressBook1);
+            //Console.WriteLine($"Total Contacts in AddressBook1 : {countAddressBook1}");
+            //int countAddressBook2 = addressBookMain.CountSingleBookContacts(addressBook2);
+            //Console.WriteLine($"Total Contacts in AddressBook2 : {countAddressBook2}");
 
             addressBookMain.AddAddressBook(addressBook1);
             addressBookMain.AddAddressBook(addressBook2);
 
-            int count = addressBookMain.CountTotalContacts();
-            Console.WriteLine($"Total contacts in all address books: {count}");
+            //int count = addressBookMain.CountTotalContacts();
+            //Console.WriteLine($"Total contacts in all address books: {count}");
 
+            //UC7 is done along with UC3 in AddContact method above
+
+            //UC8 - Search Contact By City or State
+            Console.WriteLine("Enter city to search : ");
+            string? city = Console.ReadLine();
+            var results = addressBookMain.SearchContactByCity(city);
+            int countResult = results.Count();
+            Console.WriteLine($"Found {countResult} contact(s): ");
+            foreach(var contact in results)
+            {
+                Console.WriteLine(contact);
+            }
+
+            Console.WriteLine("Enter state to search : ");
+            string? state = Console.ReadLine();
+            var stateResults = addressBookMain.SearchContactByState(state);
+            int countStateResults = stateResults.Count();
+            Console.WriteLine($"Found {countStateResults} contact(s): ");
+            foreach (var contact in stateResults)
+            {
+                Console.WriteLine(contact);
+            }
 
         }
     }
