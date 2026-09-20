@@ -66,5 +66,86 @@ namespace AddressBookApp.Services
                 }
             }
         }
+
+        public void GetCountByCityOrState()
+        {
+            var allContacts = books
+                .SelectMany(book => book.contacts);
+
+            Console.WriteLine("\n--- Count by City ---");
+
+            var cityCounts = allContacts
+                .GroupBy(contact => contact.City)
+                .Select(group => new
+                {
+                    City = group.Key,
+                    Count = group.Count()
+                });
+
+            foreach (var city in cityCounts)
+            {
+                Console.WriteLine(
+                    $"{city.City} : {city.Count}");
+            }
+
+            Console.WriteLine("\n--- Count by State ---");
+
+            var stateCounts = allContacts
+                .GroupBy(contact => contact.State)
+                .Select(group => new
+                {
+                    State = group.Key,
+                    Count = group.Count()
+                });
+
+            foreach (var state in stateCounts)
+            {
+                Console.WriteLine(
+                    $"{state.State} : {state.Count}");
+            }
+        }
+
+        // Show all contacts from all address books
+        public void GetAllContacts()
+        {
+            foreach (var book in books)
+            {
+                book.PrintAll();
+            }
+        }
+
+        public List<Contact> SortAllByName()
+        {
+            return books
+                .SelectMany(book => book.contacts)
+                .OrderBy(contact => contact.FirstName)
+                .ToList();
+        }
+
+        public List<Contact> SortAllByCity()
+        {
+            return books
+                .SelectMany(book => book.contacts)
+                .OrderBy(contact => contact.City)
+                .ToList();
+        }
+
+        public List<Contact> SortAllByState()
+        {
+            return books
+                .SelectMany(book => book.contacts)
+                .OrderBy(contact => contact.State)
+                .ToList();
+        }
+
+
+        public List<Contact> SortAllByZip()
+        {
+            return books
+                .SelectMany(book => book.contacts)
+                .OrderBy(contact => contact.Zip)
+                .ToList();
+        }
+
     }
 }

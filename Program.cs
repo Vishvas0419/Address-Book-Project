@@ -2,8 +2,6 @@
 using AddressBookApp.Models;
 using AddressBookApp.Services;
 using AddressBookApp.Validation;
-using System.Diagnostics.Contracts;
-using System.Text;
 
 namespace AddressBookApp
 {
@@ -11,135 +9,399 @@ namespace AddressBookApp
     {
         static void Main(string[] args)
         {
+            // -----------------------------
+            // Create Address Books
+            // -----------------------------
 
-            Contact contact1 = new Contact("John", "Doe", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
-            Contact contact2 = new Contact("Hello", "Jiw", "12 MG Road", "Pune", "Maharashtra", "411001", "9876543210", "john.doe@mail.com");
-            Contact contact3= new Contact("Vishvas", "Vaglay", "house no 2", "shivpuri - b", "Haryana", "135001", "9991377488", "vishvas@mail.com");
-            Contact contact4 = new Contact("Vishvas", "Vaglay", "house no 20", "shivpuri - c", "Haryana", "135002", "7991377488", "vishvas@mail.com");
-            Contact contact5 = new Contact("Bharosa", "Vaglay", "house no 221", "sundar nagar", "Punjab", "120401", "8991377488", "vishvas@mail.com");
-
-
-            try
-            {
-
-                ContactValidator.Validate(contact1);
-                Console.WriteLine(contact1);
-
-                ContactValidator.Validate(contact2);
-                Console.WriteLine(contact2);
-            } 
-            catch(InvalidContactException ex)
-            {
-                Console.WriteLine($"Error : {ex.Message}");
-                return;
-            }
-            
-            //UC-3 (Add contact) and UC-7 (check for duplicate contacts)
             AddressBook addressBook1 = new AddressBook();
-            addressBook1.AddContact(contact1);
-            addressBook1.AddContact(contact2);
-            addressBook1.PrintAll();
-
             AddressBook addressBook2 = new AddressBook();
-            addressBook2.AddContact(contact3);
-            addressBook2.AddContact(contact4); //this will not be added since duplicate names
-            addressBook2.AddContact(contact5);
-            addressBook2.PrintAll();
-
-
-            //UC 4 - edit Contact
-
-            //Console.WriteLine("Enter first name to edit");
-            //string? firstName = Console.ReadLine();
-            //Console.WriteLine("Enter last name to edit");
-            //string? lastName = Console.ReadLine();
-            //Console.WriteLine($"Editing : {firstName} {lastName}");
-            //addressBook.EditContact(firstName, lastName);
-
-            //addressBook.PrintAll();
-
-
-            //UC 5 - Delete a contact
-            //Console.WriteLine("Enter first name to delete : ");
-            //string? firstName = Console.ReadLine();
-            //Console.WriteLine("Enter last name to delete: ");
-            //string? lastName = Console.ReadLine();
-
-            //addressBook.DeleteContact(firstName, lastName);
-            //addressBook.PrintAll();
-
-
 
             AddressBookMain addressBookMain = new AddressBookMain();
-
-            //UC6 - count contacts
-
-            //int countAddressBook1 = addressBookMain.CountSingleBookContacts(addressBook1);
-            //Console.WriteLine($"Total Contacts in AddressBook1 : {countAddressBook1}");
-            //int countAddressBook2 = addressBookMain.CountSingleBookContacts(addressBook2);
-            //Console.WriteLine($"Total Contacts in AddressBook2 : {countAddressBook2}");
 
             addressBookMain.AddAddressBook(addressBook1);
             addressBookMain.AddAddressBook(addressBook2);
 
-            //int count = addressBookMain.CountTotalContacts();
-            //Console.WriteLine($"Total contacts in all address books: {count}");
 
-            //UC7 is done along with UC3 in AddContact method above
+            // -----------------------------
+            // Final Menu
+            // -----------------------------
 
-            //UC8 - Search Contact By City or State
-            //Console.WriteLine("Enter city to search : ");
-            //string? city = Console.ReadLine();
-            //var results = addressBookMain.SearchContactByCity(city);
-            //int countResult = results.Count();
-            //Console.WriteLine($"Found {countResult} contact(s): ");
-            //foreach(var contact in results)
-            //{
-            //    Console.WriteLine(contact);
-            //}
+            bool running = true;
 
-            //Console.WriteLine("Enter state to search : ");
-            //string? state = Console.ReadLine();
-            //var stateResults = addressBookMain.SearchContactByState(state);
-            //int countStateResults = stateResults.Count();
-            //Console.WriteLine($"Found {countStateResults} contact(s): ");
-            //foreach (var contact in stateResults)
-            //{
-            //    Console.WriteLine(contact);
-            //}
-
-            ////UC-9  (View Contacts by City or State)
-            //addressBookMain.ViewByCityOrState();
-
-            ////UC10 (Count by City or State)
-            //addressBook2.GetCountByCityOrState();
-
-            ////UC11 (Sort Entries by Name)
-            //Console.WriteLine("Before Sorting:");
-            //addressBook2.PrintAll();
-
-            //addressBook2.SortByName();
-
-            //Console.WriteLine("\nAfter Sorting by Name:");
-            //addressBook2.PrintAll();
-
-            //UC 12 — Sort by City, State, or Zip
-            Console.WriteLine("Enter field name to sort by contacts : ");
-            string? field = Console.ReadLine().ToLower();
-
-            Console.WriteLine($"Before Sorting by {field} : ");
-            addressBook2.PrintAll();
-            if (field == "city")
+            while (running)
             {
-                addressBook2.SortByCity();
+                Console.WriteLine();
+                Console.WriteLine("===== ADDRESS BOOK MENU =====");
+                Console.WriteLine("1. Add Contact");
+                Console.WriteLine("2. Edit Contact");
+                Console.WriteLine("3. Delete Contact");
+                Console.WriteLine("4. Show All Contacts");
+                Console.WriteLine("5. Total Contact Count");
+                Console.WriteLine("6. Search by City");
+                Console.WriteLine("7. Search by State");
+                Console.WriteLine("8. View by City/State");
+                Console.WriteLine("9. Count by City/State");
+                Console.WriteLine("10. Sort by Name");
+                Console.WriteLine("11. Sort by City / State / Zip");
+                Console.WriteLine("0. Exit");
+
+                Console.Write("\nEnter your choice: ");
+                string? choice = Console.ReadLine();
+
+
+                // =========================================
+                // UC1 / UC2 / UC3 / UC7
+                // ADD CONTACT
+                // =========================================
+
+                if (choice == "1")
+                {
+                    Console.WriteLine("\nEnter Contact Details");
+
+                    Console.Write("Enter First Name: ");
+                    string? firstName = Console.ReadLine();
+
+                    Console.Write("Enter Last Name: ");
+                    string? lastName = Console.ReadLine();
+
+                    Console.Write("Enter Address: ");
+                    string? address = Console.ReadLine();
+
+                    Console.Write("Enter City: ");
+                    string? city = Console.ReadLine();
+
+                    Console.Write("Enter State: ");
+                    string? state = Console.ReadLine();
+
+                    Console.Write("Enter Zip: ");
+                    string? zip = Console.ReadLine();
+
+                    Console.Write("Enter Phone Number: ");
+                    string? phoneNumber = Console.ReadLine();
+
+                    Console.Write("Enter Email: ");
+                    string? email = Console.ReadLine();
+
+                    try
+                    {
+                        Contact newContact = new Contact(
+                            firstName!,
+                            lastName!,
+                            address!,
+                            city!,
+                            state!,
+                            zip!,
+                            phoneNumber!,
+                            email!
+                        );
+
+                        ContactValidator.Validate(newContact);
+
+                        Console.WriteLine("\nContact is valid.");
+
+                        Console.Write("Enter Address Book (1 or 2): ");
+                        string? bookChoice = Console.ReadLine();
+
+                        if (bookChoice == "1")
+                        {
+                            addressBook1.AddContact(newContact);
+                        }
+                        else if (bookChoice == "2")
+                        {
+                            addressBook2.AddContact(newContact);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Address Book choice.");
+                        }
+                    }
+                    catch (InvalidContactException ex)
+                    {
+                        Console.WriteLine($"Error : {ex.Message}");
+                    }
+                }
+
+
+                // =========================================
+                // UC4
+                // EDIT CONTACT
+                // =========================================
+
+                else if (choice == "2")
+                {
+                    Console.Write("Enter first name to edit: ");
+                    string? firstName = Console.ReadLine();
+
+                    Console.Write("Enter last name to edit: ");
+                    string? lastName = Console.ReadLine();
+
+                    Console.Write("Enter Address Book (1 or 2): ");
+                    string? bookChoice = Console.ReadLine();
+
+                    if (bookChoice == "1")
+                    {
+                        addressBook1.EditContact(firstName!, lastName!);
+                    }
+                    else if (bookChoice == "2")
+                    {
+                        addressBook2.EditContact(firstName!, lastName!);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Address Book choice.");
+                    }
+                }
+
+
+                // =========================================
+                // UC5
+                // DELETE CONTACT
+                // =========================================
+
+                else if (choice == "3")
+                {
+                    Console.Write("Enter first name to delete: ");
+                    string? firstName = Console.ReadLine();
+
+                    Console.Write("Enter last name to delete: ");
+                    string? lastName = Console.ReadLine();
+
+                    Console.Write("Enter Address Book (1 or 2): ");
+                    string? bookChoice = Console.ReadLine();
+
+                    if (bookChoice == "1")
+                    {
+                        addressBook1.DeleteContact(firstName!, lastName!);
+                    }
+                    else if (bookChoice == "2")
+                    {
+                        addressBook2.DeleteContact(firstName!, lastName!);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Address Book choice.");
+                    }
+                }
+
+
+                // =========================================
+                // SHOW ALL CONTACTS
+                // =========================================
+
+                else if (choice == "4")
+                {
+                    Console.WriteLine("\n--- Address Book 1 ---");
+                    addressBook1.PrintAll();
+
+                    Console.WriteLine("\n--- Address Book 2 ---");
+                    addressBook2.PrintAll();
+                }
+
+
+                // =========================================
+                // UC6
+                // TOTAL CONTACT COUNT
+                // =========================================
+
+                else if (choice == "5")
+                {
+                    int countAddressBook1 =
+                        addressBookMain.CountSingleBookContacts(addressBook1);
+
+                    int countAddressBook2 =
+                        addressBookMain.CountSingleBookContacts(addressBook2);
+
+                    int totalCount =
+                        addressBookMain.CountTotalContacts();
+
+                    Console.WriteLine(
+                        $"Contacts in AddressBook1 : {countAddressBook1}"
+                    );
+
+                    Console.WriteLine(
+                        $"Contacts in AddressBook2 : {countAddressBook2}"
+                    );
+
+                    Console.WriteLine(
+                        $"Total contacts in all address books : {totalCount}"
+                    );
+                }
+
+
+                // =========================================
+                // UC8
+                // SEARCH BY CITY
+                // =========================================
+
+                else if (choice == "6")
+                {
+                    Console.Write("Enter city to search: ");
+                    string? city = Console.ReadLine();
+
+                    var results =
+                        addressBookMain.SearchContactByCity(city!);
+
+                    if (results.Count == 0)
+                    {
+                        Console.WriteLine("No contacts found.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(
+                            $"Found {results.Count} contact(s):"
+                        );
+
+                        foreach (var contact in results)
+                        {
+                            Console.WriteLine(contact);
+                        }
+                    }
+                }
+
+
+                // =========================================
+                // UC8
+                // SEARCH BY STATE
+                // =========================================
+
+                else if (choice == "7")
+                {
+                    Console.Write("Enter state to search: ");
+                    string? state = Console.ReadLine();
+
+                    var results =
+                        addressBookMain.SearchContactByState(state!);
+
+                    if (results.Count == 0)
+                    {
+                        Console.WriteLine("No contacts found.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(
+                            $"Found {results.Count} contact(s):"
+                        );
+
+                        foreach (var contact in results)
+                        {
+                            Console.WriteLine(contact);
+                        }
+                    }
+                }
+
+
+                // =========================================
+                // UC9
+                // VIEW BY CITY / STATE
+                // =========================================
+
+                else if (choice == "8")
+                {
+                    addressBookMain.ViewByCityOrState();
+                }
+
+
+                // =========================================
+                // UC10
+                // COUNT BY CITY / STATE
+                // =========================================
+
+                else if (choice == "9")
+                {
+                    addressBookMain.GetCountByCityOrState();
+                }
+
+
+                // =========================================
+                // UC11
+                // SORT BY NAME
+                // =========================================
+
+                else if (choice == "10")
+                {
+                    Console.WriteLine("\nBefore Sorting:");
+
+                    addressBookMain.GetAllContacts();
+
+                    var sortedContacts = addressBookMain.SortAllByName();
+
+                    Console.WriteLine("\nAfter Sorting by Name:");
+
+                    foreach (var contact in sortedContacts)
+                    {
+                        Console.WriteLine(contact);
+                    }
+                }
+
+
+                // =========================================
+                // UC12
+                // SORT BY CITY / STATE / ZIP
+                // =========================================
+
+                else if (choice == "11")
+                {
+                    Console.WriteLine("1. Sort by City");
+                    Console.WriteLine("2. Sort by State");
+                    Console.WriteLine("3. Sort by Zip");
+
+                    Console.Write("Enter your choice: ");
+                    string? sortChoice = Console.ReadLine();
+
+                    List<Contact> sortedContacts;
+
+                    if (sortChoice == "1")
+                    {
+                        sortedContacts = addressBookMain.SortAllByCity();
+                    }
+                    else if (sortChoice == "2")
+                    {
+                        sortedContacts = addressBookMain.SortAllByState();
+                    }
+                    else if (sortChoice == "3")
+                    {
+                        sortedContacts = addressBookMain.SortAllByZip();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
+                        continue;
+                    }
+
+                    Console.WriteLine("\nSorted Contacts:");
+
+                    foreach (var contact in sortedContacts)
+                    {
+                        Console.WriteLine(contact);
+                    }
+                }
+
+
+                // =========================================
+                // EXIT
+                // =========================================
+
+                else if (choice == "0")
+                {
+                    running = false;
+
+                    Console.WriteLine(
+                        "Exiting Address Book..."
+                    );
+                }
+
+
+                // =========================================
+                // INVALID CHOICE
+                // =========================================
+
+                else
+                {
+                    Console.WriteLine(
+                        "Invalid choice. Please enter a valid option."
+                    );
+                }
             }
-            else if (field == "state") addressBook2.SortByState();
-            else if (field == "zip") addressBook2.SortByZip();
-            else Console.WriteLine("Enter a valid field value ");
-
-            Console.WriteLine($"\nAfter Sorting by {field}:");
-            addressBook2.PrintAll();
-
         }
     }
 }

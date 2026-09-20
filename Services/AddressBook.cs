@@ -113,24 +113,24 @@ namespace AddressBookApp.Services
             }
         }
 
-        public void SortByName()
-        {
-            contacts = contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName).ToList();
-        }
+        //public void SortByName()
+        //{
+        //    contacts = contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName).ToList();
+        //}
 
 
-        public void SortByCity()
-        {
-            contacts = contacts.OrderBy(c => c.City).ToList(); //Order by converts arrganges the contacts into Alphabetical city order
-        }
+        //public void SortByCity()
+        //{
+        //    contacts = contacts.OrderBy(c => c.City).ToList(); //Order by converts arrganges the contacts into Alphabetical city order
+        //}
 
-        public void SortByState()
-        {
-            contacts = contacts.OrderBy(c => c.State).ToList();
-        }
-        public void SortByZip()
-        {
-            contacts = contacts.OrderBy(c => c.Zip).ToList();
-        }
+        //public void SortByState()
+        //{
+        //    contacts = contacts.OrderBy(c => c.State).ToList();
+        //}
+        //public void SortByZip()
+        //{
+        //    contacts = contacts.OrderBy(c => c.Zip).ToList();
+        //}
     }
 }
